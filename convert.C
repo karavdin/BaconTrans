@@ -251,6 +251,21 @@ struct BaconTree {
     eventinfo.lumiSec = jme.lumi;
     eventinfo.nPU =  jme.npus->size() ? (*jme.npus)[0] : 0;
     eventinfo.nPUmean = jme.tnpus->size() ? (*jme.tnpus)[0] : 0;
+    
+    //jets
+    for(unsigned int j = 0 ; j < jme.p4->size() ; ++j) {
+      assert(jets->GetEntries() < jets->GetSize());
+      const int index = jets->GetEntries();
+      new((*jets)[index]) baconhep::TJet();
+      baconhep::TJet    *pJet = (baconhep::TJet*)(*jets)[index];
+      pJet->pt    = (*jme.p4)[j].pt();
+      pJet->eta   = (*jme.p4)[j].eta();
+      pJet->phi   = (*jme.p4)[j].phi();
+      pJet->mass  = (*jme.p4)[j].mass();
+      pJet->ptRaw = (*jme.p4)[j].pt() * (*jme.jtjec)[j];
+      pJet->area  = (*jme.jtarea)[j];
+    }
+
     tree->Fill();
     
   }
@@ -270,7 +285,7 @@ int convert(string infile, string outfile, string jetcoll) {
   std::cout << "input file " << infile << " with " << nev << " events.\n";
   for(int i = 0 ; i < nev ; ++i) {
     jmetree.read(i);
-    if(jmetree.p4->size() == 0) continue;
+    if(jmetree.p4->size() < 2) continue;
     std::cout << "event " << jmetree.evt << " vertices:" << jmetree.position->size() << " rhos " << jmetree.rhos->size() << " jets " << jmetree.p4->size() << '\n';
     /*
     for(unsigned int j = 0 ; j < jmetree.p4->size() ; ++j) {
