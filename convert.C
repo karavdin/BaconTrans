@@ -95,7 +95,8 @@ struct JMETree {
   vector<float>   *betaStarClassic;
   vector<float>   *dZ;
   vector<float>   *y;
-  vector<float>   *fRing1; 
+  vector<float>   *fRing1;
+  vector<float>   *combinedSecondaryVertexBJetTags;
   std::vector<CovMatrix> *covariance;
   std::vector<PointVector> *position;
   vector<bool>    *isValid;
@@ -195,6 +196,7 @@ struct JMETree {
     tjet->SetBranchAddress("dZ",&dZ);
     tjet->SetBranchAddress("y",&y);
     tjet->SetBranchAddress("fRing1",&fRing1);
+    tjet->SetBranchAddress("combinedSecondaryVertexBJetTags",&combinedSecondaryVertexBJetTags);
 
     tvtx->SetBranchAddress("covariance",&covariance);
     tvtx->SetBranchAddress("position",&position);
@@ -251,6 +253,48 @@ struct BaconTree {
     eventinfo.lumiSec = jme.lumi;
     eventinfo.nPU =  jme.npus->size() ? (*jme.npus)[0] : 0;
     eventinfo.nPUmean = jme.tnpus->size() ? (*jme.tnpus)[0] : 0;
+    eventinfo.triggerBits = jme.prescales->size();
+    //eventinfo.pfMET =  // not stored?
+    //eventinfo.pfMETphi = jme.
+    geneventinfo.id_1 = jme.pdf_id->first;
+    geneventinfo.id_2 = jme.pdf_id->second;
+    geneventinfo.x_1 = jme.pdf_x->first;
+    geneventinfo.x_2 = jme.pdf_x->second;
+    geneventinfo.weight = jme.weight;
+    //geneventinfo.pthat = jme.pthat; // is missing in the header - but anyway not needed (at the moment)
+
+    for(unsigned int j = 0 ; j < jme.position->size() ; ++j) {
+     assert(vertices->GetEntries() < vertices->GetSize());
+      const int index = vertices->GetEntries();
+      new((*vertices)[index]) baconhep::TVertex();
+      baconhep::TVertex    *pVertex = (baconhep::TVertex*)(*vertices)[index];
+      //pVertex->nTracksFit =  
+      pVertex->ndof = (*jme.ndof)[j];
+      pVertex->chi2 = (*jme.normalizedChi2)[j];
+      pVertex->x = (*jme.position)[j].X();
+      pVertex->y = (*jme.position)[j].Y();
+      pVertex->z = (*jme.position)[j].Z();
+
+    }
+
+    for(unsigned int j = 0 ; j < jme.p4->size() ; ++j) {
+      assert(jets->GetEntries() < jets->GetSize());
+      const int index = jets->GetEntries();
+      new((*jets)[index]) baconhep::TJet();
+      baconhep::TJet    *pJet = (baconhep::TJet*)(*jets)[index];
+      pJet->pt    = (*jme.p4)[j].pt();
+      pJet->eta   = (*jme.p4)[j].eta();
+      pJet->phi   = (*jme.p4)[j].phi();
+      pJet->mass  = (*jme.p4)[j].mass();
+      pJet->ptRaw = (*jme.p4)[j].pt() * (*jme.jtjec)[j];
+      // pJet->csv = (*jme.combinedSecondaryVertexBJetTags)[j];  // only stored in AK4PFCHS
+      pJet->genpt    = (*jme.gen_p4)[j].pt();
+      pJet->geneta   = (*jme.gen_p4)[j].eta();
+      pJet->genphi   = (*jme.gen_p4)[j].phi();
+      pJet->genm  = (*jme.gen_p4)[j].mass();
+      pJet->area  = (*jme.jtarea)[j];
+    }
+
     tree->Fill();
     
   }
@@ -270,7 +314,7 @@ int convert(string infile, string outfile, string jetcoll) {
   std::cout << "input file " << infile << " with " << nev << " events.\n";
   for(int i = 0 ; i < nev ; ++i) {
     jmetree.read(i);
-    if(jmetree.p4->size() == 0) continue;
+    if(jmetree.p4->size() < 2) continue;
     std::cout << "event " << jmetree.evt << " vertices:" << jmetree.position->size() << " rhos " << jmetree.rhos->size() << " jets " << jmetree.p4->size() << '\n';
     /*
     for(unsigned int j = 0 ; j < jmetree.p4->size() ; ++j) {
