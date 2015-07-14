@@ -51,6 +51,7 @@ struct JMETree {
   vector<int>     *pu_ntrks_highpt;
   std::pair<float, float> *pdf_x;
   std::pair<int, int>    *pdf_id;
+  //hlt
   vector<vector<bool> > *objects_paths_islast;
   vector<vector<int> > *objects_paths;
   vector<vector<bool> > *objects_paths_isl3;
@@ -60,51 +61,106 @@ struct JMETree {
   vector<float>   *objects_pt;
   vector<int>     *prescales;
   vector<string>  *paths;
-  vector<float>   *QGTagger_qgLikelihood;
-  vector<float>   *PUJetId_fullDiscriminant;
-  vector<float>   *ptD;
-  vector<unsigned short> *nNeutrals;
-  vector<unsigned short> *nCh;
-  vector<float>   *fRing8;
-  vector<float>   *fRing7;
-  vector<float>   *fRing6;
-  vector<float>   *fRing5;
-  vector<float>   *fRing4;
-  vector<float>   *refdrjt;
-  vector<PtEtaPhiE4Vector> *gen_p4;
-  vector<PtEtaPhiE4Vector> *p4;
-  vector<float>   *jtarea;
-  vector<float>   *refarea;
-  vector<float>   *DRweighted;
-  vector<signed char> *gen_charge;
-  vector<int>     *refpdgid;
-  vector<signed char> *hadronFlavor;
-  vector<bool>    *has_gen_particle;
-  vector<float>   *fRing3;
-  vector<signed char> *charge;
-  vector<signed char> *partonFlavor;
-  vector<float>   *gen_y;
-  vector<int>     *PUJetId_fullId;
-  vector<float>   *jtjec;
-  vector<float>   *beta;
-  vector<float>   *betaStar;
-  vector<float>   *fRing2;
-  vector<float>   *betaClassic;
-  vector<int>     *PUJetId_cutBasedId;
-  vector<float>   *fRing0;
-  vector<float>   *betaStarClassic;
+  //jets
+  vector<bool>    *allGenJet_patJetmatched;
+  vector<float>   *allGenJet_phi;
+  vector<float>   *neutralEmEnergyFraction;
+  vector<float>   *hoEnergyFraction;
+  vector<float>   *HFEMEnergyFraction;
+  vector<float>   *chargedMuEnergyFraction;
+  vector<float>   *chargedHadronEnergyFraction;
   vector<float>   *dZ;
+  vector<int>     *nTot;
+  vector<int>     *PUJetId_cutBasedId;
+  vector<float>   *betaStar;
+  vector<map<string,float> > *jec_factors;
+  vector<float>   *betaClassic;
+  vector<float>   *jec_toraw;
+  vector<signed char> *hadronFlavor;
+  vector<int>     *chargedMultiplicity;
+  vector<float>   *gen_y;
   vector<float>   *y;
   vector<float>   *fRing1;
-  //vector<float>   *combinedSecondaryVertexBJetTags;
-  std::vector<CovMatrix> *covariance;
-  std::vector<PointVector> *position;
+  vector<signed char> *partonFlavor;
+  vector<float>   *fRing3;
+  vector<float>   *allGenJet_pt;
+  vector<bool>    *has_gen_particle;
+  vector<int>     *refpdgid;
+  vector<signed char> *gen_charge;
+  vector<float>   *fRing2;
+  vector<float>   *DRweighted;
+  vector<float>   *photonEnergyFraction;
+  vector<float>   *refarea;
+  vector<float>   *jtarea;
+  vector<PtEtaPhiE4Vector> *p4;
+  vector<float>   *refdrjt;
+  vector<float>   *neutralHadronEnergyFraction;
+  vector<float>   *fRing4;
+  vector<float>   *axisMinor;
+  vector<float>   *fRing5;
+  vector<float>   *electronEnergyFraction;
+  vector<float>   *fRing6;
+  vector<float>   *axisMajor;
+  vector<float>   *betaStarClassic;
+  vector<float>   *fRing7;
+  vector<unsigned short> *nCh;
+  vector<float>   *fRing0;
+  vector<unsigned short> *nNeutrals;
+  vector<float>   *allGenJet_m;
+  vector<float>   *allGenJet_eta;
+  vector<float>   *HFHadronEnergyFraction;
+  vector<PtEtaPhiE4Vector> *gen_p4;
+  vector<float>   *ptD;
+  vector<float>   *PUJetId_fullDiscriminant;
+  vector<int>     *PUJetId_fullId;
+  vector<float>   *chargedEmEnergyFraction;
+  vector<float>   *jetRchg;
+  vector<signed char> *charge;
+  vector<float>   *QGTagger_qgLikelihood;
+  vector<float>   *dRMatch;
+  vector<float>   *muonEnergyFraction;
+  vector<float>   *fRing8;
+  vector<float>   *pull;
+  vector<float>   *beta;
+  vector<float>   *jetRneutral;
+  vector<float>   *jetR;
+  vector<float>   *Ttheta;
+  vector<float>   *pfTrackCountingHighEffBJetTags;
+  vector<float>   *pfTrackCountingHighPurBJetTags;
+  vector<float>   *pfJetProbabilityBJetTags;
+  vector<float>   *pfJetBProbabilityBJetTags;
+  vector<float>   *pfSimpleSecondaryVertexHighEffBJetTags;
+  vector<float>   *pfSimpleSecondaryVertexHighPurBJetTags;
+  vector<float>   *pfCombinedSecondaryVertexV2BJetTags;
+  vector<float>   *pfCombinedInclusiveSecondaryVertexV2BJetTags;
+  //vertex
+  vector<CovMatrix> *covariance;
+  vector<PointVector> *position;
   vector<bool>    *isValid;
   vector<bool>    *isFake;
   vector<float>   *ndof;
   vector<float>   *normalizedChi2;
+  //met
+  vector<float>   *met_caloMET_pt;
+  vector<float>   *met_gen_significance;
+  vector<float>   *met_gen_sumEt;
+  vector<float>   *met_uncorrectedSumEt;
+  vector<float>   *met_gen_y;
+  vector<float>   *met_uncorrectedPhi;
+  vector<float>   *met_y;
+  vector<float>   *met_sumEt;
+  vector<float>   *met_significance;
+  vector<signed char> *met_charge;
+  vector<float>   *met_caloMET_sumEt;
+  vector<bool>    *met_has_gen_particle;
+  vector<PtEtaPhiE4Vector> *met_gen_p4;
+  vector<PtEtaPhiE4Vector> *met_p4;
+  vector<float>   *met_caloMET_phi;
+  vector<signed char> *met_gen_charge;
+  vector<float>   *met_uncorrectedPt;
 
-  TTree *tevent, *thlt,*tvtx, *tjet;
+
+  TTree *tevent, *thlt,*tvtx, *tjet, *tmet;
 
 
   long init(TFile* f,  string jetcoll) {
@@ -116,12 +172,14 @@ struct JMETree {
     dir->GetObject("t",tvtx);
     dir = (TDirectory*)f->Get(jetcoll.c_str());
     dir->GetObject("t",tjet);
-
+    dir = (TDirectory*)f->Get("met_chs");
+    dir->GetObject("t",tmet);
 
     assert(tevent);
     assert(thlt);
     assert(tvtx);
     assert(tjet);
+    assert(tmet);
 
     // Set branch addresses.
     tevent->SetBranchAddress("nMEPartonsFiltered",&nMEPartonsFiltered);
@@ -160,43 +218,78 @@ struct JMETree {
     thlt->SetBranchAddress("prescales",&prescales);
     thlt->SetBranchAddress("paths",&paths);
 
-    tjet->SetBranchAddress("QGTagger_qgLikelihood",&QGTagger_qgLikelihood);
-    tjet->SetBranchAddress("PUJetId_fullDiscriminant",&PUJetId_fullDiscriminant);
-    tjet->SetBranchAddress("ptD",&ptD);
-    tjet->SetBranchAddress("nNeutrals",&nNeutrals);
-    tjet->SetBranchAddress("nCh",&nCh);
-    tjet->SetBranchAddress("fRing8",&fRing8);
-    tjet->SetBranchAddress("fRing7",&fRing7);
-    tjet->SetBranchAddress("fRing6",&fRing6);
-    tjet->SetBranchAddress("fRing5",&fRing5);
-    tjet->SetBranchAddress("fRing4",&fRing4);
-    tjet->SetBranchAddress("refdrjt",&refdrjt);
-    tjet->SetBranchAddress("gen_p4",&gen_p4);
-    tjet->SetBranchAddress("p4",&p4);
-    tjet->SetBranchAddress("jtarea",&jtarea);
-    tjet->SetBranchAddress("refarea",&refarea);
-    tjet->SetBranchAddress("DRweighted",&DRweighted);
-    tjet->SetBranchAddress("gen_charge",&gen_charge);
-    tjet->SetBranchAddress("refpdgid",&refpdgid);
-    tjet->SetBranchAddress("hadronFlavor",&hadronFlavor);
-    tjet->SetBranchAddress("has_gen_particle",&has_gen_particle);
-    tjet->SetBranchAddress("fRing3",&fRing3);
-    tjet->SetBranchAddress("charge",&charge);
-    tjet->SetBranchAddress("partonFlavor",&partonFlavor);
-    tjet->SetBranchAddress("gen_y",&gen_y);
-    tjet->SetBranchAddress("PUJetId_fullId",&PUJetId_fullId);
-    tjet->SetBranchAddress("jtjec",&jtjec);
-    tjet->SetBranchAddress("beta",&beta);
-    tjet->SetBranchAddress("betaStar",&betaStar);
-    tjet->SetBranchAddress("fRing2",&fRing2);
-    tjet->SetBranchAddress("betaClassic",&betaClassic);
-    tjet->SetBranchAddress("PUJetId_cutBasedId",&PUJetId_cutBasedId);
-    tjet->SetBranchAddress("fRing0",&fRing0);
-    tjet->SetBranchAddress("betaStarClassic",&betaStarClassic);
+    tjet->SetBranchAddress("allGenJet_patJetmatched",&allGenJet_patJetmatched);
+    tjet->SetBranchAddress("allGenJet_phi",&allGenJet_phi);
+    tjet->SetBranchAddress("neutralEmEnergyFraction",&neutralEmEnergyFraction);
+    tjet->SetBranchAddress("hoEnergyFraction",&hoEnergyFraction);
+    tjet->SetBranchAddress("HFEMEnergyFraction",&HFEMEnergyFraction);
+    tjet->SetBranchAddress("chargedMuEnergyFraction",&chargedMuEnergyFraction);
+    tjet->SetBranchAddress("chargedHadronEnergyFraction",&chargedHadronEnergyFraction);
     tjet->SetBranchAddress("dZ",&dZ);
+    tjet->SetBranchAddress("nTot",&nTot);
+    tjet->SetBranchAddress("PUJetId_cutBasedId",&PUJetId_cutBasedId);
+    tjet->SetBranchAddress("betaStar",&betaStar);
+    tjet->SetBranchAddress("jec_factors",&jec_factors);
+    tjet->SetBranchAddress("betaClassic",&betaClassic);
+    tjet->SetBranchAddress("jec_toraw",&jec_toraw);
+    tjet->SetBranchAddress("hadronFlavor",&hadronFlavor);
+    tjet->SetBranchAddress("chargedMultiplicity",&chargedMultiplicity);
+    tjet->SetBranchAddress("gen_y",&gen_y);
     tjet->SetBranchAddress("y",&y);
     tjet->SetBranchAddress("fRing1",&fRing1);
-    //tjet->SetBranchAddress("combinedSecondaryVertexBJetTags",&combinedSecondaryVertexBJetTags);
+    tjet->SetBranchAddress("partonFlavor",&partonFlavor);
+    tjet->SetBranchAddress("fRing3",&fRing3);
+    tjet->SetBranchAddress("allGenJet_pt",&allGenJet_pt);
+    tjet->SetBranchAddress("has_gen_particle",&has_gen_particle);
+    tjet->SetBranchAddress("refpdgid",&refpdgid);
+    tjet->SetBranchAddress("gen_charge",&gen_charge);
+    tjet->SetBranchAddress("fRing2",&fRing2);
+    tjet->SetBranchAddress("DRweighted",&DRweighted);
+    tjet->SetBranchAddress("photonEnergyFraction",&photonEnergyFraction);
+    tjet->SetBranchAddress("refarea",&refarea);
+    tjet->SetBranchAddress("jtarea",&jtarea);
+    tjet->SetBranchAddress("p4",&p4);
+    tjet->SetBranchAddress("refdrjt",&refdrjt);
+    tjet->SetBranchAddress("neutralHadronEnergyFraction",&neutralHadronEnergyFraction);
+    tjet->SetBranchAddress("fRing4",&fRing4);
+    tjet->SetBranchAddress("axisMinor",&axisMinor);
+    tjet->SetBranchAddress("fRing5",&fRing5);
+    tjet->SetBranchAddress("electronEnergyFraction",&electronEnergyFraction);
+    tjet->SetBranchAddress("fRing6",&fRing6);
+    tjet->SetBranchAddress("axisMajor",&axisMajor);
+    tjet->SetBranchAddress("betaStarClassic",&betaStarClassic);
+    tjet->SetBranchAddress("fRing7",&fRing7);
+    tjet->SetBranchAddress("nCh",&nCh);
+    tjet->SetBranchAddress("fRing0",&fRing0);
+    tjet->SetBranchAddress("nNeutrals",&nNeutrals);
+    tjet->SetBranchAddress("allGenJet_m",&allGenJet_m);
+    tjet->SetBranchAddress("allGenJet_eta",&allGenJet_eta);
+    tjet->SetBranchAddress("HFHadronEnergyFraction",&HFHadronEnergyFraction);
+    tjet->SetBranchAddress("gen_p4",&gen_p4);
+    tjet->SetBranchAddress("ptD",&ptD);
+    tjet->SetBranchAddress("PUJetId_fullDiscriminant",&PUJetId_fullDiscriminant);
+    tjet->SetBranchAddress("PUJetId_fullId",&PUJetId_fullId);
+    tjet->SetBranchAddress("chargedEmEnergyFraction",&chargedEmEnergyFraction);
+    tjet->SetBranchAddress("jetRchg",&jetRchg);
+    tjet->SetBranchAddress("charge",&charge);
+    tjet->SetBranchAddress("QGTagger_qgLikelihood",&QGTagger_qgLikelihood);
+    tjet->SetBranchAddress("dRMatch",&dRMatch);
+    tjet->SetBranchAddress("muonEnergyFraction",&muonEnergyFraction);
+    tjet->SetBranchAddress("fRing8",&fRing8);
+    tjet->SetBranchAddress("pull",&pull);
+    tjet->SetBranchAddress("beta",&beta);
+    tjet->SetBranchAddress("jetRneutral",&jetRneutral);
+    tjet->SetBranchAddress("jetR",&jetR);
+    tjet->SetBranchAddress("Ttheta",&Ttheta);
+    tjet->SetBranchAddress("pfTrackCountingHighEffBJetTags",&pfTrackCountingHighEffBJetTags);
+    tjet->SetBranchAddress("pfTrackCountingHighPurBJetTags",&pfTrackCountingHighPurBJetTags);
+    tjet->SetBranchAddress("pfJetProbabilityBJetTags",&pfJetProbabilityBJetTags);
+    tjet->SetBranchAddress("pfJetBProbabilityBJetTags",&pfJetBProbabilityBJetTags);
+    tjet->SetBranchAddress("pfSimpleSecondaryVertexHighEffBJetTags",&pfSimpleSecondaryVertexHighEffBJetTags);
+    tjet->SetBranchAddress("pfSimpleSecondaryVertexHighPurBJetTags",&pfSimpleSecondaryVertexHighPurBJetTags);
+    tjet->SetBranchAddress("pfCombinedSecondaryVertexV2BJetTags",&pfCombinedSecondaryVertexV2BJetTags);
+    tjet->SetBranchAddress("pfCombinedInclusiveSecondaryVertexV2BJetTags",&pfCombinedInclusiveSecondaryVertexV2BJetTags);
+
 
     tvtx->SetBranchAddress("covariance",&covariance);
     tvtx->SetBranchAddress("position",&position);
@@ -205,10 +298,29 @@ struct JMETree {
     tvtx->SetBranchAddress("ndof",&ndof);
     tvtx->SetBranchAddress("normalizedChi2",&normalizedChi2);
 
+    tmet->SetBranchAddress("caloMET_pt",&met_caloMET_pt);
+    tmet->SetBranchAddress("gen_significance",&met_gen_significance);
+    tmet->SetBranchAddress("gen_sumEt",&met_gen_sumEt);
+    tmet->SetBranchAddress("uncorrectedSumEt",&met_uncorrectedSumEt);
+    tmet->SetBranchAddress("gen_y",&met_gen_y);
+    tmet->SetBranchAddress("uncorrectedPhi",&met_uncorrectedPhi);
+    tmet->SetBranchAddress("y",&met_y);
+    tmet->SetBranchAddress("sumEt",&met_sumEt);
+    tmet->SetBranchAddress("significance",&met_significance);
+    tmet->SetBranchAddress("charge",&met_charge);
+    tmet->SetBranchAddress("caloMET_sumEt",&met_caloMET_sumEt);
+    tmet->SetBranchAddress("has_gen_particle",&met_has_gen_particle);
+    tmet->SetBranchAddress("gen_p4",&met_gen_p4);
+    tmet->SetBranchAddress("p4",&met_p4);
+    tmet->SetBranchAddress("gen_charge",&met_gen_charge);
+    tmet->SetBranchAddress("caloMET_phi",&met_caloMET_phi);
+    tmet->SetBranchAddress("uncorrectedPt",&met_uncorrectedPt);
+
     int entries = tevent->GetEntries();
     assert(thlt->GetEntries()==entries);
     assert(tjet->GetEntries()==entries);
     assert(tvtx->GetEntries()==entries);
+    assert(tmet->GetEntries()==entries);
     return entries;
   }
   void read(long i) {
@@ -216,6 +328,7 @@ struct JMETree {
     thlt->GetEntry(i);
     tjet->GetEntry(i);
     tvtx->GetEntry(i);
+    tmet->GetEntry(i);
   }
 };
 
@@ -262,6 +375,8 @@ struct BaconTree {
     eventinfo.lumiSec = jme.lumi;
     eventinfo.nPU =  jme.npus->size() ? (*jme.npus)[0] : 0;
     eventinfo.nPUmean = jme.tnpus->size() ? (*jme.tnpus)[0] : 0;
+    eventinfo.rhoIso = 0;
+    eventinfo.rhoJet = jme.rho;
     eventinfo.triggerBits = 0;
     for(auto i = jme.paths->cbegin() ;  i != jme.paths->cend() ; ++i) {
       //cout << "testing " << *i << endl;
@@ -276,8 +391,8 @@ struct BaconTree {
       //std::cout << *i << endl;
     }
     //eventinfo.triggerBits = jme.prescales->size();
-    //eventinfo.pfMET =  // not stored atm, to be done later
-    //eventinfo.pfMETphi = jme.
+    eventinfo.pfMET =  (*jme.met_p4)[0].Pt();// not stored atm, to be done later
+    eventinfo.pfMETphi = (*jme.met_p4)[0].Phi();
     geneventinfo.id_1 = jme.pdf_id->first;
     geneventinfo.id_2 = jme.pdf_id->second;
     geneventinfo.x_1 = jme.pdf_x->first;
@@ -315,13 +430,14 @@ struct BaconTree {
       pJet->eta   = (*jme.p4)[j].eta();
       pJet->phi   = (*jme.p4)[j].phi();
       pJet->mass  = (*jme.p4)[j].mass();
-      pJet->ptRaw = (*jme.p4)[j].pt() * (*jme.jtjec)[j];
-      // pJet->csv = (*jme.combinedSecondaryVertexBJetTags)[j];  // only stored in AK4PFCHS, to be done later
+      pJet->ptRaw = (*jme.p4)[j].pt() * (*jme.jec_toraw)[j];
+      //pJet->csv = (*jme.pfCombinedSecondaryVertexV2BJetTags)[j];  // only stored in AK4PFCHS, to be done later
       pJet->area  = (*jme.jtarea)[j];
       pJet->genpt    = (*jme.gen_p4)[j].pt();
       pJet->geneta   = (*jme.gen_p4)[j].eta();
       pJet->genphi   = (*jme.gen_p4)[j].phi();
       pJet->genm  = (*jme.gen_p4)[j].mass();
+      pJet->betaStar = (*jme.betaStar)[j];
       //std::cout << pJet->pt << std::endl;
     }
 
