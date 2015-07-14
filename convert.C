@@ -103,11 +103,11 @@ struct JMETree {
   vector<bool>    *isFake;
   vector<float>   *ndof;
   vector<float>   *normalizedChi2;
-  
+
   TTree *tevent, *thlt,*tvtx, *tjet;
-  
-  
-  long init(TFile* f,  string jetcoll) {  
+
+
+  long init(TFile* f,  string jetcoll) {
     TDirectory* dir = (TDirectory*)f->Get("event");
     dir->GetObject("t",tevent);
     dir = (TDirectory*)f->Get("hlt");
@@ -148,8 +148,8 @@ struct JMETree {
     tevent->SetBranchAddress("pu_ntrks_highpt",&pu_ntrks_highpt);
     tevent->SetBranchAddress("pdf_x",&pdf_x);
     tevent->SetBranchAddress("pdf_id",&pdf_id);
-    
-    
+
+
     thlt->SetBranchAddress("objects_paths_islast",&objects_paths_islast);
     thlt->SetBranchAddress("objects_paths",&objects_paths);
     thlt->SetBranchAddress("objects_paths_isl3",&objects_paths_isl3);
@@ -159,7 +159,7 @@ struct JMETree {
     thlt->SetBranchAddress("objects_pt",&objects_pt);
     thlt->SetBranchAddress("prescales",&prescales);
     thlt->SetBranchAddress("paths",&paths);
-  
+
     tjet->SetBranchAddress("QGTagger_qgLikelihood",&QGTagger_qgLikelihood);
     tjet->SetBranchAddress("PUJetId_fullDiscriminant",&PUJetId_fullDiscriminant);
     tjet->SetBranchAddress("ptD",&ptD);
@@ -213,7 +213,7 @@ struct JMETree {
   }
   void read(long i) {
     tevent->GetEntry(i);
-    thlt->GetEntry(i); 
+    thlt->GetEntry(i);
     tjet->GetEntry(i);
     tvtx->GetEntry(i);
   }
@@ -224,8 +224,9 @@ struct BaconTree {
   baconhep::TGenEventInfo geneventinfo;
   TClonesArray *vertices,*jets,*addjets;
   TTree *tree;
+  vector<string> *triggernames;
 
-  void init(TFile *f, string jetcoll) {  
+  void init(TFile *f, string jetcoll) {
     baconhep::TEventInfo::Class()->IgnoreTObjectStreamer();
     baconhep::TGenEventInfo::Class()->IgnoreTObjectStreamer();
     baconhep::TJet::Class()->IgnoreTObjectStreamer();
@@ -235,13 +236,21 @@ struct BaconTree {
     vertices = new TClonesArray("baconhep::TVertex");
     jets = new TClonesArray("baconhep::TJet");
     addjets = new TClonesArray("baconhep::TAddJet");
-    
+    triggernames = new vector<string>({"HLT_ZeroBias","HLT_DiPFJetAve100_HFJEC", "HLT_DiPFJetAve140", "HLT_DiPFJetAve160_HFJEC",
+	                                     "HLT_DiPFJetAve200", "HLT_DiPFJetAve220_HFJEC", "HLT_DiPFJetAve260", "HLT_DiPFJetAve300_HFJEC",
+	                                     "HLT_DiPFJetAve320", "HLT_DiPFJetAve400",	"HLT_DiPFJetAve40", "HLT_DiPFJetAve500",
+	                                     "HLT_DiPFJetAve60_HFJEC", "HLT_DiPFJetAve60", "HLT_DiPFJetAve80_HFJEC", "HLT_DiPFJetAve80",
+                                       "HLT_PFJet140", "HLT_PFJet200", "HLT_PFJet260", "HLT_PFJet320", "HLT_PFJet400", "HLT_PFJet40",
+                                       "HLT_PFJet450", "HLT_PFJet500", "HLT_PFJet60", "HLT_PFJet80"});
+    sort(triggernames->begin(),triggernames->end());
+
     f->cd();
     tree   = new TTree("Events","Events");
     tree->Branch("Info",&eventinfo);
     tree->Branch("GenEvtInfo",&geneventinfo);
     tree->Branch("PV",&vertices);
     tree->Branch(jetcoll.c_str(),&jets);
+    tree->Branch("TriggerNames",&triggernames);
     string addname = "Add";
     addname +=jetcoll;
     tree->Branch(addname.c_str(),&addjets);
@@ -253,7 +262,20 @@ struct BaconTree {
     eventinfo.lumiSec = jme.lumi;
     eventinfo.nPU =  jme.npus->size() ? (*jme.npus)[0] : 0;
     eventinfo.nPUmean = jme.tnpus->size() ? (*jme.tnpus)[0] : 0;
-    eventinfo.triggerBits = jme.prescales->size();
+    eventinfo.triggerBits = 0;
+    for(auto i = jme.paths->cbegin() ;  i != jme.paths->cend() ; ++i) {
+      //cout << "testing " << *i << endl;
+      for(auto i2 = triggernames->cbegin(); i2 != triggernames->cend() ; ++i2) {
+        if(*i2 > *i) break;
+        //cout << "trying " << *i2 << endl;
+        if(i->compare(0,min(i->size(),i2->size()),*i2) == 0) {
+          //std::cout << "setting" << *i << ", " << *i2 << " " << i2-triggernames->cbegin() << endl;
+          eventinfo.triggerBits[i2-triggernames->cbegin()] = true;
+        }
+      }
+      //std::cout << *i << endl;
+    }
+    //eventinfo.triggerBits = jme.prescales->size();
     //eventinfo.pfMET =  // not stored atm, to be done later
     //eventinfo.pfMETphi = jme.
     geneventinfo.id_1 = jme.pdf_id->first;
@@ -263,25 +285,25 @@ struct BaconTree {
     geneventinfo.weight = jme.weight;
     //geneventinfo.pthat = jme.pthat; // is missing in the header - but anyway not needed (at the moment)
 
-    
+
     vertices->Clear();
     jets->Clear();
     addjets->Clear();
 
 
     for(unsigned int j = 0 ; j < jme.position->size() ; ++j) {
-     assert(vertices->GetEntries() < vertices->GetSize());
+      assert(vertices->GetEntries() < vertices->GetSize());
       const int index = vertices->GetEntries();
       new((*vertices)[index]) baconhep::TVertex();
       baconhep::TVertex    *pVertex = (baconhep::TVertex*)(*vertices)[index];
-      //pVertex->nTracksFit =  
+      //pVertex->nTracksFit =
       pVertex->ndof = (*jme.ndof)[j];
       pVertex->chi2 = (*jme.normalizedChi2)[j];
       pVertex->x = (*jme.position)[j].X();
       pVertex->y = (*jme.position)[j].Y();
       pVertex->z = (*jme.position)[j].Z();
     }
-    
+
 
 
     for(unsigned int j = 0 ; j < jme.p4->size() ; ++j) {
@@ -305,7 +327,7 @@ struct BaconTree {
 
 
     tree->Fill();
-    
+
   }
 
 
@@ -315,7 +337,7 @@ int convert(string infile, string outfile, string jetcoll) {
   JMETree jmetree = { };
   TFile* fin = TFile::Open(infile.c_str());
   long nev = jmetree.init(fin,jetcoll);
-  
+
   TFile* fout = TFile::Open(outfile.c_str(),"RECREATE");
   BaconTree bacontree;
   bacontree.init(fout,jetcoll);
@@ -337,4 +359,4 @@ int convert(string infile, string outfile, string jetcoll) {
   bacontree.tree->Write();
   fout->Close();
   return 0;
-} 
+}
