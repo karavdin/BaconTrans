@@ -1,5 +1,7 @@
-#ifndef BACONANA_NTUPLER_BACONANADEFS_HH
-#define BACONANA_NTUPLER_BACONANADEFS_HH
+#pragma once
+
+//#ifndef BACONANA_NTUPLER_BACONANADEFS_HH
+//#define BACONANA_NTUPLER_BACONANADEFS_HH
 
 #include <bitset>
 
@@ -36,4 +38,4 @@ typedef std::bitset<kNTrigBit> TriggerBits;
 const unsigned int kNTrigObjectBit = 256;
 typedef std::bitset<kNTrigObjectBit> TriggerObjects;
 
-#endif
+//#endif

@@ -1,8 +1,12 @@
-#ifndef BACONANA_DATAFORMATS_TJET_HH
-#define BACONANA_DATAFORMATS_TJET_HH
+#pragma once
 
-#include "baconheaders/BaconAnaDefs.hh"
+//#ifndef BACONANA_DATAFORMATS_TJET_HH
+//#define BACONANA_DATAFORMATS_TJET_HH
+
+#include <bitset>
+#include "UHH2/BaconTrans/baconheaders/BaconAnaDefs.hh"
 #include <TObject.h>
+
 
 namespace baconhep
 {
@@ -20,10 +24,10 @@ namespace baconhep
       beta(0),betaStar(0),dR2Mean(0),ptD(0),q(0),pull(0),pullAngle(0),
       chEmFrac(0), neuEmFrac(0), chHadFrac(0), neuHadFrac(0),
       mcFlavor(0), 
-      genpt(0),geneta(0),genphi(0),genm(0),
-      hltMatchBits(0)
+      genpt(0),geneta(0),genphi(0),genm(0)//,
+      //,   hltMatchBits(0)
       {}
-      ~TJet(){}
+      virtual ~TJet(){}
     
       float pt, eta, phi, mass, ptRaw,unc;                   // kinematics
       float area;                                        // jet area (from FastJet)
@@ -39,9 +43,9 @@ namespace baconhep
       float chEmFrac, neuEmFrac, chHadFrac, neuHadFrac;  // fractional contribution by type
       int mcFlavor,mcFlavorPhys;                                      //Flavor
       float genpt,geneta,genphi,genm;                    // Gen Matched values
-      TriggerObjects hltMatchBits;                        // HLT matching
+    //   TriggerObjects hltMatchBits;                        // HLT matching //TEST: not used later?
           
-    ClassDef(TJet,1)
+    // ClassDef(TJet,1)
   };
 }
-#endif
+//#endif

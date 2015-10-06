@@ -12,16 +12,25 @@
 #include "TClonesArray.h"
 
 
-#include "baconheaders/TEventInfo.hh"
-#include "baconheaders/TGenEventInfo.hh"
-#include "baconheaders/TTrigger.hh"
-#include "baconheaders/TriggerRecord.hh"
-#include "baconheaders/TVertex.hh"
-#include "baconheaders/TJet.hh"
-#include "baconheaders/TAddJet.hh"
+// #include "baconheaders/TEventInfo.hh"
+// #include "baconheaders/TGenEventInfo.hh"
+// #include "baconheaders/TTrigger.hh"
+// #include "baconheaders/TriggerRecord.hh"
+// #include "baconheaders/TVertex.hh"
+// #include "baconheaders/TJet.hh"
+// #include "baconheaders/TAddJet.hh"
+
+#include "TEventInfo.hh"
+#include "TGenEventInfo.hh"
+#include "TTrigger.hh"
+#include "TriggerRecord.hh"
+#include "TVertex.hh"
+#include "TJet.hh"
+#include "TAddJet.hh"
 
 
 using namespace std;
+using namespace baconhep;
 typedef ROOT::Math::LorentzVector<ROOT::Math::PtEtaPhiE4D<float> > PtEtaPhiE4Vector;
 typedef ROOT::Math::PositionVector3D<ROOT::Math::Cartesian3D<double>,ROOT::Math::DefaultCoordinateSystemTag> PointVector;
 typedef ROOT::Math::SMatrix<double,3,3,ROOT::Math::MatRepSym<double,3> > CovMatrix;
@@ -170,6 +179,7 @@ struct JMETree {
     dir->GetObject("t",thlt);
     dir = (TDirectory*)f->Get("vertex");
     dir->GetObject("t",tvtx);
+    //   cout<<"search for Dir = "<<jetcoll.c_str()<<endl;
     dir = (TDirectory*)f->Get(jetcoll.c_str());
     dir->GetObject("t",tjet);
     dir = (TDirectory*)f->Get("met_chs");
@@ -317,6 +327,7 @@ struct JMETree {
     tmet->SetBranchAddress("uncorrectedPt",&met_uncorrectedPt);
 
     int entries = tevent->GetEntries();
+    cout<<"Number of events in file: "<<entries<<endl;
     assert(thlt->GetEntries()==entries);
     assert(tjet->GetEntries()==entries);
     assert(tvtx->GetEntries()==entries);
@@ -340,11 +351,11 @@ struct BaconTree {
   vector<string> *triggernames;
 
   void init(TFile *f, string jetcoll) {
-    baconhep::TEventInfo::Class()->IgnoreTObjectStreamer();
-    baconhep::TGenEventInfo::Class()->IgnoreTObjectStreamer();
-    baconhep::TJet::Class()->IgnoreTObjectStreamer();
-    baconhep::TVertex::Class()->IgnoreTObjectStreamer();
-    baconhep::TAddJet::Class()->IgnoreTObjectStreamer();
+    // baconhep::TEventInfo::Class()->IgnoreTObjectStreamer();
+    // baconhep::TGenEventInfo::Class()->IgnoreTObjectStreamer();
+    // baconhep::TJet::Class()->IgnoreTObjectStreamer();
+    // baconhep::TVertex::Class()->IgnoreTObjectStreamer();
+    // baconhep::TAddJet::Class()->IgnoreTObjectStreamer();
 
     vertices = new TClonesArray("baconhep::TVertex");
     jets = new TClonesArray("baconhep::TJet");
@@ -458,16 +469,15 @@ int convert(string infile, string outfile, string jetcoll) {
   BaconTree bacontree;
   bacontree.init(fout,jetcoll);
 
-  //  std::cout << "input file " << infile << " with " << nev << " events.\n";
+  // std::cout << "input file " << infile << " with " << nev << " events.\n";
   for(int i = 0 ; i < nev ; ++i) {
     jmetree.read(i);
     if(jmetree.p4->size() < 2) continue;
-    //std::cout << "event " << jmetree.evt << " vertices:" << jmetree.position->size() << " rhos " << jmetree.rhos->size() << " jets " << jmetree.p4->size() << '\n';
-    /*
-    for(unsigned int j = 0 ; j < jmetree.p4->size() ; ++j) {
-      std::cout << (*jmetree.p4)[j].pt() << '\n';
-    }
-    */
+    //  std::cout << "event " << jmetree.evt << " vertices:" << jmetree.position->size() << " rhos " << jmetree.rhos->size() << " jets " << jmetree.p4->size() << '\n';
+    
+    // for(unsigned int j = 0 ; j < jmetree.p4->size() ; ++j) {
+    //   std::cout << (*jmetree.p4)[j].pt() << '\n';
+    // }
     bacontree.fill(jmetree);
   }
 

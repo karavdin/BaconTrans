@@ -1,5 +1,7 @@
-#ifndef BACONANA_DATAFORMATS_TVERTEX_HH
-#define BACONANA_DATAFORMATS_TVERTEX_HH
+#pragma once
+
+//#ifndef BACONANA_DATAFORMATS_TVERTEX_HH
+//#define BACONANA_DATAFORMATS_TVERTEX_HH
 
 #include <TObject.h>
 
@@ -20,7 +22,7 @@ namespace baconhep
       float        chi2;        // vertex fit chi-square
       float        x,y,z;       // position
     
-    ClassDef(TVertex,1)
+    // ClassDef(TVertex,1)
   };
 }
-#endif
+//#endif

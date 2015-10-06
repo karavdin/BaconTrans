@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef BACONANA_NTUPLER_TRIGGERRECORD_HH
 #define BACONANA_NTUPLER_TRIGGERRECORD_HH
 
@@ -16,7 +18,7 @@ public:
     hltPathName  = "";
     hltPathIndex = (unsigned int)-1;
   }
-  ~TriggerRecord(){}
+  virtual ~TriggerRecord(){}
 
   std::string	hltPattern;    // HLT path name/pattern (wildcards allowed: *,?)
   unsigned int  baconTrigBit;  // bacon trigger bit

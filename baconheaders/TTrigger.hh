@@ -1,8 +1,8 @@
 #ifndef BACONANA_DATAFORMATS_TTRIGGER_HH
 #define BACONANA_DATAFORMATS_TTRIGGER_HH
 
-#include "baconheaders/TriggerRecord.hh"  // class to handle user specified trigger info
-#include "baconheaders/BaconAnaDefs.hh"
+#include "UHH2/BaconTrans/baconheaders/TriggerRecord.hh"  // class to handle user specified trigger info
+#include "UHH2/BaconTrans/baconheaders/BaconAnaDefs.hh"
 
 namespace baconhep
 {

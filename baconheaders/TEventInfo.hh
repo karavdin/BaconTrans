@@ -1,7 +1,9 @@
-#ifndef BACONANA_DATAFORMATS_TEVENTINFO_HH
-#define BACONANA_DATAFORMATS_TEVENTINFO_HH
+#pragma once
 
-#include "baconheaders/BaconAnaDefs.hh"
+//#ifndef BACONANA_DATAFORMATS_TEVENTINFO_HH
+//#define BACONANA_DATAFORMATS_TEVENTINFO_HH
+
+#include "UHH2/BaconTrans/baconheaders/BaconAnaDefs.hh"
 #include <TObject.h>
 
 namespace baconhep 
@@ -43,7 +45,7 @@ namespace baconhep
       TriggerBits   triggerBits;                               // fired trigger bits
       bool          hasGoodPV;                                 // event has a good PV?
 
-    ClassDef(TEventInfo,1)
+    //  ClassDef(TEventInfo,1)
   };
 }
-#endif
+//#endif

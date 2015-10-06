@@ -1,7 +1,7 @@
 #ifndef BACONANA_DATAFORMATS_TTAU_HH
 #define BACONANA_DATAFORMATS_TTAU_HH
 
-#include "BaconAna/DataFormats/interface/BaconAnaDefs.hh"
+#include "UHH2/BaconTrans/baconheaders/BaconAnaDefs.hh"
 #include <TObject.h>
 
 namespace baconhep
