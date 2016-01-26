@@ -1,8 +1,8 @@
 {
   gROOT->Macro("UHH2/BaconTrans/load.C");
 
-  convert("/nfs/dust/cms/user/karavdia/JEC/output_mc.root","/nfs/dust/cms/user/karavdia/JEC/Bacon_output_mc.root","AK4PFCHS");
-  convert("/nfs/dust/cms/user/karavdia/JEC/output_data.root","/nfs/dust/cms/user/karavdia/JEC/Bacon_output_data.root","AK4PFCHS");
+  convert("/nfs/dust/cms/user/karavdia/JEC_76X/General/MC/output_mc.root","/nfs/dust/cms/user/karavdia/JEC_76X/Bacon/MC/Bacon_output_mc.root","AK4PFCHS");
+  convert("/nfs/dust/cms/user/karavdia/JEC_76X/General/DATA/output_data.root","/nfs/dust/cms/user/karavdia/JEC_76X/Bacon/DATA/Bacon_output_data.root","AK4PFCHS");
 
   // //convert("/nfs/dust/cms/user/kovalch/CRAB/ZeroBias/jme_1.root","test.root","nt_AK4PFCluster");
   // //convert("/pnfs/desy.de/cms/tier2/store/user/stadie/ZeroBias1/zero/150625_132419/0000/jme_1.root","test.root","nt_AK4PFCluster");

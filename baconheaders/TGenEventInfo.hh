@@ -11,7 +11,7 @@ namespace baconhep
     TGenEventInfo():
       id_1(0),  id_2(0),
       x_1(0),   x_2(0),
-      scalePDF(0), weight(0)
+      scalePDF(0), weight(0),pthat(0)
     {}
     ~TGenEventInfo(){}
 
@@ -19,7 +19,7 @@ namespace baconhep
     float x_1,   x_2;    // parton momentum fraction
     float scalePDF;      // Q-scale used for PDF evaluation
     float weight;
-
+    float pthat;
     //  ClassDef(TGenEventInfo,1)
   };
 }
