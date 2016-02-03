@@ -1,8 +1,8 @@
-#ifndef BACONANA_DATAFORMATS_TPFPART_HH
-#define BACONANA_DATAFORMATS_TPFPART_HH
+// #ifndef BACONANA_DATAFORMATS_TPFPART_HH
+// #define BACONANA_DATAFORMATS_TPFPART_HH
+#pragma once
 
 #include <TObject.h>
-
 
 namespace baconhep
 {
@@ -30,4 +30,4 @@ namespace baconhep
     ClassDef(TPFPart,1)
   };
 }
-#endif
+//#endif

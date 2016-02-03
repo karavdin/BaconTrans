@@ -22,7 +22,7 @@ namespace baconhep
       float        chi2;        // vertex fit chi-square
       float        x,y,z;       // position
     
-    // ClassDef(TVertex,1)
+     ClassDef(TVertex,1)
   };
 }
 //#endif

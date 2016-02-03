@@ -1,5 +1,6 @@
-#ifndef BACONANA_DATAFORMATS_TTRIGGER_HH
-#define BACONANA_DATAFORMATS_TTRIGGER_HH
+// #ifndef BACONANA_DATAFORMATS_TTRIGGER_HH
+// #define BACONANA_DATAFORMATS_TTRIGGER_HH
+#pragma once
 
 #include "UHH2/BaconTrans/baconheaders/TriggerRecord.hh"  // class to handle user specified trigger info
 #include "UHH2/BaconTrans/baconheaders/BaconAnaDefs.hh"
@@ -21,4 +22,4 @@ namespace baconhep
     std::vector<baconhep::TriggerRecord> fRecords;
   };
 }
-#endif
+//#endif

@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef BACONANA_DATAFORMATS_TELECTRON_HH
-#define BACONANA_DATAFORMATS_TELECTRON_HH
+// #ifndef BACONANA_DATAFORMATS_TELECTRON_HH
+// #define BACONANA_DATAFORMATS_TELECTRON_HH
 
 #include "UHH2/BaconTrans/baconheaders/BaconAnaDefs.hh"
 #include <TObject.h>
@@ -58,7 +58,7 @@ namespace baconhep
       int           trkID;                                // track ID number (unique per event)
       TriggerObjects hltMatchBits;                         // HLT matches
       
-    ClassDef(TElectron,1)
+      ClassDef(TElectron,1)
   };
 
   enum EEleType
@@ -67,4 +67,4 @@ namespace baconhep
     kTrackerDriven = 2
   };
 }
-#endif
+//#endif

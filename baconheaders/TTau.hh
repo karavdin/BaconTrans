@@ -1,5 +1,7 @@
-#ifndef BACONANA_DATAFORMATS_TTAU_HH
-#define BACONANA_DATAFORMATS_TTAU_HH
+// #ifndef BACONANA_DATAFORMATS_TTAU_HH
+// #define BACONANA_DATAFORMATS_TTAU_HH
+
+#pragma once 
 
 #include "UHH2/BaconTrans/baconheaders/BaconAnaDefs.hh"
 #include <TObject.h>
@@ -35,7 +37,7 @@ namespace baconhep
       unsigned long hpsDisc;             // HPS tau discriminators
       TriggerObjects hltMatchBits;        // HLT matches
          
-    ClassDef(TTau,1)
+     ClassDef(TTau,1)
   };
   
   enum EHPSDiscriminator{
@@ -82,4 +84,4 @@ namespace baconhep
     kByTightMuonRejection3                     = 1UL<<36   // MediumMuonRejection2 && large enough energy deposit in ECAL+HCAL in 1 prong + 0 strip decay mode (SUM(ECAL+HCAL)>0.2*pT)
   };
 }
-#endif
+//#endif

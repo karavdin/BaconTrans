@@ -1,5 +1,6 @@
 //#ifndef BACONANA_DATAFORMATS_TGENEVENTINFO_HH
 //#define BACONANA_DATAFORMATS_TGENEVENTINFO_HH
+#pragma once
 
 #include "TObject.h"
 
@@ -20,7 +21,7 @@ namespace baconhep
     float scalePDF;      // Q-scale used for PDF evaluation
     float weight;
     float pthat;
-    //  ClassDef(TGenEventInfo,1)
+    ClassDef(TGenEventInfo,2)
   };
 }
 //#endif

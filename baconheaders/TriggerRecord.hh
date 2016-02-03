@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef BACONANA_NTUPLER_TRIGGERRECORD_HH
-#define BACONANA_NTUPLER_TRIGGERRECORD_HH
+// #ifndef BACONANA_NTUPLER_TRIGGERRECORD_HH
+// #define BACONANA_NTUPLER_TRIGGERRECORD_HH
 
 #include <vector>
 #include <string>
@@ -30,4 +30,4 @@ public:
 };
 
 }
-#endif
+//#endif

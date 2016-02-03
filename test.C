@@ -8,7 +8,7 @@
   second = ".root";
   std::string tmp;
   Long_t *id,*size,*flags,*mt;
-  for (int i=1; i<1424; i++){
+  for (int i=0; i<1424; i++){
   //  for (int i=0; i<1; i++){
     tmp = std::to_string(i);
     path = first+tmp+second;
@@ -18,7 +18,7 @@
     // conversion if the file exists...
     if(!gSystem->GetPathInfo(tmp_,id,size,flags,mt)){ 
       std::cout << "    ++++++    conversion of " << path << " to bacon data format    ++++++" << std::endl;
-      convert(first+tmp+second,"/nfs/dust/cms/user/karavdia/BaconTrans_JEC/AK4PFCHS/JMEValidatorTree_13TeV_DATA_RunIID_Cert_246908-260627_v2_13TeV_PromptReco_Collisions15_25ns_JSON_Summer15_25nsV6_DATA/dataJetHTRun2015D16Dec_"+tmp+".root","AK4PFCHS");
+      convert(first+tmp+second,"/nfs/dust/cms/user/karavdia/BaconTrans_JEC2/AK4PFCHS/JMEValidatorTree_13TeV_DATA_RunIID_Cert_246908-260627_v2_13TeV_PromptReco_Collisions15_25ns_JSON_Summer15_25nsV6_DATA/dataJetHTRun2015D16Dec_"+tmp+".root","AK4PFCHS");
     }
   }
 }

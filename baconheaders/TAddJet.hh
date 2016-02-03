@@ -34,7 +34,7 @@ namespace baconhep
     float pt_f1,ptraw_f1,eta_f1,phi_f1,mass_f1,area_f1;    // Jet Info with filtering default   
     float pt_f2,ptraw_f2,eta_f2,phi_f2,mass_f2,area_f2;    // Jet Info with fitlering Tight 
     float c2_0,c2_0P2,c2_0P5,c2_1P0,c2_2P0;                // Correlation function of varying exponent
-    //  ClassDef(TAddJet,1)
+    ClassDef(TAddJet,1)
   };
 }
 //#endif

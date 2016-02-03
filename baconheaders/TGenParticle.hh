@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef BACONANA_DATAFORMATS_TGENPARTICLE_HH
-#define BACONANA_DATAFORMATS_TGENPARTICLE_HH
+// #ifndef BACONANA_DATAFORMATS_TGENPARTICLE_HH
+// #define BACONANA_DATAFORMATS_TGENPARTICLE_HH
 
 #include <TObject.h>
 
@@ -24,4 +24,4 @@ namespace baconhep
     ClassDef(TGenParticle,1)
   };
 }
-#endif
+//#endif

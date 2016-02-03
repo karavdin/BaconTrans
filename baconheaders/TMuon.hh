@@ -1,5 +1,6 @@
-#ifndef BACONANA_DATAFORMATS_TMUON_HH
-#define BACONANA_DATAFORMATS_TMUON_HH
+// #ifndef BACONANA_DATAFORMATS_TMUON_HH
+// #define BACONANA_DATAFORMATS_TMUON_HH
+#pragma once
 
 #include "UHH2/BaconTrans/baconheaders/BaconAnaDefs.hh"
 #include <TObject.h>
@@ -50,7 +51,7 @@ namespace baconhep
       int           trkID;                                         // tracker track ID (unique per event)
       TriggerObjects hltMatchBits;                                  // HLT matching
           
-    ClassDef(TMuon,1)
+      ClassDef(TMuon,1)
   };
 
   enum EMuType
@@ -100,4 +101,4 @@ namespace baconhep
     kRPCMuLoose                             = 0x1000000   // checks isRPCMuon flag (require two well matched hits in different RPC layers)
   };
 }
-#endif
+//#endif

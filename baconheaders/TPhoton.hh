@@ -1,5 +1,6 @@
-#ifndef BACONANA_DATAFORMATS_TPHOTON_HH
-#define BACONANA_DATAFORMATS_TPHOTON_HH
+// #ifndef BACONANA_DATAFORMATS_TPHOTON_HH
+// #define BACONANA_DATAFORMATS_TPHOTON_HH
+#pragma once
 
 #include "UHH2/BaconTrans/baconheaders/BaconAnaDefs.hh"
 #include <TObject.h>
@@ -41,7 +42,7 @@ namespace baconhep
       bool          isConv;                               // matched to a reconstructed conversion?
       TriggerObjects hltMatchBits;                         // HLT matches
           
-    ClassDef(TPhoton,1)
+      ClassDef(TPhoton,1)
   };
   
   enum EPhotonType
@@ -51,4 +52,4 @@ namespace baconhep
     kPFMuonPhoton = 4   // for HZZ4l FSR recovery
   };
 }
-#endif
+//#endif

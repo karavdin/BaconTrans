@@ -10,7 +10,24 @@ namespace baconhep
 {
   class TEventInfo : public TObject
   {
-    public:
+  public:
+    unsigned int  runNum, evtNum, lumiSec;                   // run number, event number, lumi section in data
+    unsigned int  metFilterFailBits;                         // MET filter fail bits
+    unsigned int  nPU, nPUm, nPUp;                           // number of reconstructed pile-up vertices
+    float         nPUmean, nPUmeanm, nPUmeanp;               // expected number of reconstructed pile-up vertices
+    float         pvx, pvy, pvz;                             // best primary vertex
+    float         bsx, bsy, bsz;                             // beamspot
+    float         pfMET, pfMETphi;                           // particle flow MET
+    float         pfMETCov00, pfMETCov01, pfMETCov11;
+    float         mvaMET, mvaMETphi;                         // MVA MET
+    float         mvaMETCov00, mvaMETCov01, mvaMETCov11;
+    float         mvaMETU, mvaMETUphi;
+    float         mvaMETUCov00, mvaMETUCov01, mvaMETUCov11;
+    float         trkMET, trkMETphi;                         // track MET
+    float         rhoIso, rhoJet;                            // event energy density
+    TriggerBits   triggerBits;                               // fired trigger bits
+    bool          hasGoodPV;                                 // event has a good PV?
+
       TEventInfo():
       runNum(0), evtNum(0), lumiSec(0),
       metFilterFailBits(0),
@@ -25,27 +42,11 @@ namespace baconhep
       rhoIso(0), rhoJet(0),
       triggerBits(0),
       hasGoodPV(false)             
-      {}
-      ~TEventInfo(){}
+    {};
 
-      unsigned int  runNum, evtNum, lumiSec;                   // run number, event number, lumi section in data
-      unsigned int  metFilterFailBits;                         // MET filter fail bits
-      unsigned int  nPU, nPUm, nPUp;                           // number of reconstructed pile-up vertices
-      float         nPUmean, nPUmeanm, nPUmeanp;               // expected number of reconstructed pile-up vertices
-      float         pvx, pvy, pvz;                             // best primary vertex
-      float         bsx, bsy, bsz;                             // beamspot
-      float         pfMET, pfMETphi;                           // particle flow MET
-      float         pfMETCov00, pfMETCov01, pfMETCov11;
-      float         mvaMET, mvaMETphi;                         // MVA MET
-      float         mvaMETCov00, mvaMETCov01, mvaMETCov11;
-      float         mvaMETU, mvaMETUphi;
-      float         mvaMETUCov00, mvaMETUCov01, mvaMETUCov11;
-      float         trkMET, trkMETphi;                         // track MET
-      float         rhoIso, rhoJet;                            // event energy density
-      TriggerBits   triggerBits;                               // fired trigger bits
-      bool          hasGoodPV;                                 // event has a good PV?
-
-    //  ClassDef(TEventInfo,1)
+    ~TEventInfo(){};
+     
+    ClassDef(TEventInfo,2)
   };
 }
 //#endif

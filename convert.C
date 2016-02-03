@@ -12,25 +12,16 @@
 #include "TClonesArray.h"
 
 
-// #include "baconheaders/TEventInfo.hh"
-// #include "baconheaders/TGenEventInfo.hh"
-// #include "baconheaders/TTrigger.hh"
-// #include "baconheaders/TriggerRecord.hh"
-// #include "baconheaders/TVertex.hh"
-// #include "baconheaders/TJet.hh"
-// #include "baconheaders/TAddJet.hh"
-
-#include "TEventInfo.hh"
-#include "TGenEventInfo.hh"
-#include "TTrigger.hh"
-#include "TriggerRecord.hh"
-#include "TVertex.hh"
-#include "TJet.hh"
-#include "TAddJet.hh"
+#include "baconheaders/TEventInfo.hh"
+#include "baconheaders/TGenEventInfo.hh"
+#include "baconheaders/TTrigger.hh"
+#include "baconheaders/TriggerRecord.hh"
+#include "baconheaders/TVertex.hh"
+#include "baconheaders/TJet.hh"
+#include "baconheaders/TAddJet.hh"
 
 
 using namespace std;
-using namespace baconhep;
 typedef ROOT::Math::LorentzVector<ROOT::Math::PtEtaPhiE4D<float> > PtEtaPhiE4Vector;
 typedef ROOT::Math::PositionVector3D<ROOT::Math::Cartesian3D<double>,ROOT::Math::DefaultCoordinateSystemTag> PointVector;
 typedef ROOT::Math::SMatrix<double,3,3,ROOT::Math::MatRepSym<double,3> > CovMatrix;
@@ -179,7 +170,6 @@ struct JMETree {
     dir->GetObject("t",thlt);
     dir = (TDirectory*)f->Get("vertex");
     dir->GetObject("t",tvtx);
-    //   cout<<"search for Dir = "<<jetcoll.c_str()<<endl;
     dir = (TDirectory*)f->Get(jetcoll.c_str());
     dir->GetObject("t",tjet);
     dir = (TDirectory*)f->Get("met_chs");
@@ -351,21 +341,21 @@ struct BaconTree {
   vector<string> *triggernames;
 
   void init(TFile *f, string jetcoll) {
-    // baconhep::TEventInfo::Class()->IgnoreTObjectStreamer();
-    // baconhep::TGenEventInfo::Class()->IgnoreTObjectStreamer();
-    // baconhep::TJet::Class()->IgnoreTObjectStreamer();
-    // baconhep::TVertex::Class()->IgnoreTObjectStreamer();
-    // baconhep::TAddJet::Class()->IgnoreTObjectStreamer();
+    baconhep::TEventInfo::Class()->IgnoreTObjectStreamer();
+    baconhep::TGenEventInfo::Class()->IgnoreTObjectStreamer();
+    baconhep::TJet::Class()->IgnoreTObjectStreamer();
+    baconhep::TVertex::Class()->IgnoreTObjectStreamer();
+    baconhep::TAddJet::Class()->IgnoreTObjectStreamer();
 
     vertices = new TClonesArray("baconhep::TVertex");
     jets = new TClonesArray("baconhep::TJet");
     addjets = new TClonesArray("baconhep::TAddJet");
-    triggernames = new vector<string>({"HLT_ZeroBias","HLT_DiPFJetAve100_HFJEC", "HLT_DiPFJetAve140", "HLT_DiPFJetAve160_HFJEC",
-	                                     "HLT_DiPFJetAve200", "HLT_DiPFJetAve220_HFJEC", "HLT_DiPFJetAve260", "HLT_DiPFJetAve300_HFJEC",
-	                                     "HLT_DiPFJetAve320", "HLT_DiPFJetAve400",	"HLT_DiPFJetAve40", "HLT_DiPFJetAve500",
-	                                     "HLT_DiPFJetAve60_HFJEC", "HLT_DiPFJetAve60", "HLT_DiPFJetAve80_HFJEC", "HLT_DiPFJetAve80",
-                                       "HLT_PFJet140", "HLT_PFJet200", "HLT_PFJet260", "HLT_PFJet320", "HLT_PFJet400", "HLT_PFJet40",
-                                       "HLT_PFJet450", "HLT_PFJet500", "HLT_PFJet60", "HLT_PFJet80"});
+    triggernames = new vector<string>({"HLT_ZeroBias_v","HLT_DiPFJetAve100_HFJEC_v", "HLT_DiPFJetAve140_v", "HLT_DiPFJetAve160_HFJEC_v",
+	                                     "HLT_DiPFJetAve200_v", "HLT_DiPFJetAve220_HFJEC_v", "HLT_DiPFJetAve260_v", "HLT_DiPFJetAve300_HFJEC_v",
+	                                     "HLT_DiPFJetAve320_v", "HLT_DiPFJetAve400_",	"HLT_DiPFJetAve40_v", "HLT_DiPFJetAve500_v",
+	                                     "HLT_DiPFJetAve60_HFJEC_v", "HLT_DiPFJetAve60_v", "HLT_DiPFJetAve80_HFJEC_v", "HLT_DiPFJetAve80_v",
+                                       "HLT_PFJet140_v", "HLT_PFJet200_v", "HLT_PFJet260_v", "HLT_PFJet320_v", "HLT_PFJet40_v", "HLT_PFJet400_v",
+                                       "HLT_PFJet450_v", "HLT_PFJet500_v", "HLT_PFJet60_v", "HLT_PFJet80_v"});
     sort(triggernames->begin(),triggernames->end());
 
     f->cd();
@@ -390,16 +380,16 @@ struct BaconTree {
     eventinfo.rhoJet = jme.rho;
     eventinfo.triggerBits = 0;
     for(auto i = jme.paths->cbegin() ;  i != jme.paths->cend() ; ++i) {
-      //cout << "testing " << *i << endl;
+//       cout << "testing " << *i << endl;
       for(auto i2 = triggernames->cbegin(); i2 != triggernames->cend() ; ++i2) {
         if(*i2 > *i) break;
-        //cout << "trying " << *i2 << endl;
+//         cout << "trying " << *i2 << endl;
         if(i->compare(0,min(i->size(),i2->size()),*i2) == 0) {
-          //std::cout << "setting" << *i << ", " << *i2 << " " << i2-triggernames->cbegin() << endl;
+//           std::cout << "setting" << *i << ", " << *i2 << " " << i2-triggernames->cbegin() << endl;
           eventinfo.triggerBits[i2-triggernames->cbegin()] = true;
         }
       }
-      //std::cout << *i << endl;
+//       std::cout << *i << endl;
     }
     //eventinfo.triggerBits = jme.prescales->size();
     eventinfo.pfMET =  (*jme.met_p4)[0].Pt();// not stored atm, to be done later
@@ -409,7 +399,7 @@ struct BaconTree {
     geneventinfo.x_1 = jme.pdf_x->first;
     geneventinfo.x_2 = jme.pdf_x->second;
     geneventinfo.weight = jme.weight;
-    //geneventinfo.pthat = jme.pthat; // is missing in the header - but anyway not needed (at the moment)
+    geneventinfo.pthat = jme.pthat; // is missing in the header - but anyway not needed (at the moment)
 
 
     vertices->Clear();
@@ -469,15 +459,16 @@ int convert(string infile, string outfile, string jetcoll) {
   BaconTree bacontree;
   bacontree.init(fout,jetcoll);
 
-  // std::cout << "input file " << infile << " with " << nev << " events.\n";
+  //  std::cout << "input file " << infile << " with " << nev << " events.\n";
   for(int i = 0 ; i < nev ; ++i) {
     jmetree.read(i);
     if(jmetree.p4->size() < 2) continue;
-    //  std::cout << "event " << jmetree.evt << " vertices:" << jmetree.position->size() << " rhos " << jmetree.rhos->size() << " jets " << jmetree.p4->size() << '\n';
-    
-    // for(unsigned int j = 0 ; j < jmetree.p4->size() ; ++j) {
-    //   std::cout << (*jmetree.p4)[j].pt() << '\n';
-    // }
+    //std::cout << "event " << jmetree.evt << " vertices:" << jmetree.position->size() << " rhos " << jmetree.rhos->size() << " jets " << jmetree.p4->size() << '\n';
+    /*
+    for(unsigned int j = 0 ; j < jmetree.p4->size() ; ++j) {
+      std::cout << (*jmetree.p4)[j].pt() << '\n';
+    }
+    */
     bacontree.fill(jmetree);
   }
 
