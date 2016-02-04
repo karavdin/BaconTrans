@@ -8,8 +8,8 @@
   second = ".root";
   std::string tmp;
   Long_t *id,*size,*flags,*mt;
-  for (int i=0; i<1424; i++){
-  //  for (int i=0; i<1; i++){
+  //  for (int i=0; i<1424; i++){
+  for (int i=0; i<10; i++){
     tmp = std::to_string(i);
     path = first+tmp+second;
     const char *tmp_ = path.c_str();

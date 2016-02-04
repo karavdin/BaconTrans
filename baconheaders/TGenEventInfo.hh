@@ -2,11 +2,12 @@
 //#define BACONANA_DATAFORMATS_TGENEVENTINFO_HH
 #pragma once
 
-#include "TObject.h"
+//#include "TObject.h"
 
 namespace baconhep 
 {
-  class TGenEventInfo : public TObject
+  //  class TGenEventInfo : public TObject
+  class TGenEventInfo
   {
   public:
     TGenEventInfo():
@@ -21,7 +22,7 @@ namespace baconhep
     float scalePDF;      // Q-scale used for PDF evaluation
     float weight;
     float pthat;
-    ClassDef(TGenEventInfo,2)
+    //  ClassDef(TGenEventInfo,2)
   };
 }
 //#endif

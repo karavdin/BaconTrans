@@ -4,11 +4,12 @@
 //#define BACONANA_DATAFORMATS_TEVENTINFO_HH
 
 #include "UHH2/BaconTrans/baconheaders/BaconAnaDefs.hh"
-#include <TObject.h>
+//#include <TObject.h>
 
 namespace baconhep 
 {
-  class TEventInfo : public TObject
+  //  class TEventInfo : public TObject
+  class TEventInfo
   {
   public:
     unsigned int  runNum, evtNum, lumiSec;                   // run number, event number, lumi section in data
@@ -46,7 +47,7 @@ namespace baconhep
 
     ~TEventInfo(){};
      
-    ClassDef(TEventInfo,2)
+    //  ClassDef(TEventInfo,2)
   };
 }
 //#endif

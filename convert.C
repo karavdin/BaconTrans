@@ -341,8 +341,8 @@ struct BaconTree {
   vector<string> *triggernames;
 
   void init(TFile *f, string jetcoll) {
-    baconhep::TEventInfo::Class()->IgnoreTObjectStreamer();
-    baconhep::TGenEventInfo::Class()->IgnoreTObjectStreamer();
+    // baconhep::TEventInfo::Class()->IgnoreTObjectStreamer();
+    // baconhep::TGenEventInfo::Class()->IgnoreTObjectStreamer();
     baconhep::TJet::Class()->IgnoreTObjectStreamer();
     baconhep::TVertex::Class()->IgnoreTObjectStreamer();
     baconhep::TAddJet::Class()->IgnoreTObjectStreamer();
