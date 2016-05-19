@@ -14,10 +14,10 @@
     // conversion if the file exists...
     if(!gSystem->GetPathInfo(tmp_,id,size,flags,mt)){ 
       std::cout << "    ++++++    conversion of " << path << " to bacon data format    ++++++" << std::endl;
-      convert(first+tmp+second,"/nfs/dust/cms/user/karavdia/BaconTrans_JEC/80X/AK4PFCHS/QCD_Flat_13TeV_pythia8/mcflatherwigpp_"+tmp+".root","AK4PFCHS");
-      convert(first+tmp+second,"/nfs/dust/cms/user/karavdia/BaconTrans_JEC/80X/AK8PFCHS/QCD_Flat_13TeV_pythia8/mcflatherwigpp_"+tmp+".root","AK8PFCHS");
-      convert(first+tmp+second,"/nfs/dust/cms/user/karavdia/BaconTrans_JEC/80X/AK4PFPUPPI/QCD_Flat_13TeV_pythia8/mcflatherwigpp_"+tmp+".root","AK4PFPUPPI");
-      convert(first+tmp+second,"/nfs/dust/cms/user/karavdia/BaconTrans_JEC/80X/AK8PFPUPPI/QCD_Flat_13TeV_pythia8/mcflatherwigpp_"+tmp+".root","AK8PFPUPPI");
+      convert(first+tmp+second,"/nfs/dust/cms/user/karavdia/BaconTrans_JEC/80X/AK4PFCHS/QCD_Flat_13TeV_herwigpp/mcflatherwigpp_"+tmp+".root","AK4PFCHS");
+      convert(first+tmp+second,"/nfs/dust/cms/user/karavdia/BaconTrans_JEC/80X/AK8PFCHS/QCD_Flat_13TeV_herwigpp/mcflatherwigpp_"+tmp+".root","AK8PFCHS");
+      convert(first+tmp+second,"/nfs/dust/cms/user/karavdia/BaconTrans_JEC/80X/AK4PFPUPPI/QCD_Flat_13TeV_herwigpp/mcflatherwigpp_"+tmp+".root","AK4PFPUPPI");
+      convert(first+tmp+second,"/nfs/dust/cms/user/karavdia/BaconTrans_JEC/80X/AK8PFPUPPI/QCD_Flat_13TeV_herwigpp/mcflatherwigpp_"+tmp+".root","AK8PFPUPPI");
     }
   }
 }
